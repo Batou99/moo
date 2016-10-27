@@ -25,8 +25,8 @@ type Point = [Double]
 -- calculating exact hypervolumes. Evolutionary Computation, IEEE
 -- Transactions on, 16(1), 86-95.
 --
-hypervolume :: forall fn a . ObjectiveFunction fn a
-            => MultiObjectiveProblem fn   -- ^ multiobjective problem @mop@
+hypervolume :: forall fn a .
+               MultiObjectiveProblem fn   -- ^ multiobjective problem @mop@
             -> [Objective]                -- ^ reference point (the worst point)
             -> [MultiPhenotype a]         -- ^ a set of solutions to evaluate
             -> Double                     -- ^ hypervolume

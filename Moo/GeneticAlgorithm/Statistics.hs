@@ -16,7 +16,7 @@ module Moo.GeneticAlgorithm.Statistics
 import Data.List (sort, foldl')
 
 -- |Average
-average :: (Num a, Fractional a) => [a] -> a
+average :: (Fractional a) => [a] -> a
 average = uncurry (/) . foldl' (\(!s, !c) x -> (s+x, c+1)) (0, 0)
 
 -- |Population variance (divided by n).
@@ -65,12 +65,12 @@ quantile7 n xs prob =
 
 
 -- | Median
-median :: (Real a, RealFrac a) => [a] -> a
+median :: (RealFrac a) => [a] -> a
 median xs = head $ quantiles xs [0.5]
 
 
 -- | Interquartile range.
-iqr :: (Real a, RealFrac a) => [a] -> a
+iqr :: (RealFrac a) => [a] -> a
 iqr xs =
     let [q1,q2] = quantiles xs [0.25, 0.75]
     in  q2 - q1

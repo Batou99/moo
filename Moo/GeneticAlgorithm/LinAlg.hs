@@ -22,10 +22,10 @@ scale :: Num a => a -> [a] -> [a]
 scale a xs   = map (a*) xs
 dot :: Num a => [a] -> [a] -> a
 dot xs ys    = sum $ zipWith (*) xs ys
-norm2 :: (Num a, Floating a) => [a] -> a
+norm2 :: (Floating a) => [a] -> a
 norm2 xs     = sqrt $ dot xs xs
-proj :: (Num a, Fractional a) => [a] -> [a] -> [a]
+proj :: (Fractional a) => [a] -> [a] -> [a]
 proj xs dir  = ( dot xs dir / dot dir dir ) `scale` dir
-normalize :: (Num a, Floating a, Fractional a) => [a] -> [a]
+normalize :: (Floating a) => [a] -> [a]
 normalize xs = let a = norm2 xs in (1.0/a) `scale` xs
 
