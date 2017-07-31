@@ -88,7 +88,7 @@ bitsNeeded (from, to) =
 -- single point mutation leads to incremental change of the encoded
 -- value.
 #if MIN_VERSION_base(4, 7, 0)
-encodeGray :: (FiniteBits b, Bits b, Integral b) => (b, b) -> b -> [Bool]
+encodeGray :: (FiniteBits b, Integral b) => (b, b) -> b -> [Bool]
 #else
 encodeGray :: (Bits b, Integral b) => (b, b) -> b -> [Bool]
 #endif
@@ -98,7 +98,7 @@ encodeGray = encodeWithCode gray
 -- range @(from, to)@ (inclusive). This is an inverse of 'encodeGray'.
 -- Actual value returned may be greater than @to@.
 #if MIN_VERSION_base(4, 7, 0)
-decodeGray :: (FiniteBits b, Bits b, Integral b) => (b, b) -> [Bool] -> b
+decodeGray :: (FiniteBits b, Integral b) => (b, b) -> [Bool] -> b
 #else
 decodeGray :: (Bits b, Integral b) => (b, b) -> [Bool] -> b
 #endif
@@ -109,7 +109,7 @@ decodeGray = decodeWithCode binary
 -- means that a single point mutation may lead to sudden big change
 -- of the encoded value.
 #if MIN_VERSION_base(4, 7, 0)
-encodeBinary :: (FiniteBits b, Bits b, Integral b) => (b, b) -> b -> [Bool]
+encodeBinary :: (FiniteBits b, Integral b) => (b, b) -> b -> [Bool]
 #else
 encodeBinary :: (Bits b, Integral b) => (b, b) -> b -> [Bool]
 #endif
@@ -119,7 +119,7 @@ encodeBinary = encodeWithCode id
 -- (inclusive). This is an inverse of 'encodeBinary'.  Actual value
 -- returned may be greater than @to@.
 #if MIN_VERSION_base(4, 7, 0)
-decodeBinary :: (FiniteBits b, Bits b, Integral b) => (b, b) -> [Bool] -> b
+decodeBinary :: (FiniteBits b, Integral b) => (b, b) -> [Bool] -> b
 #else
 decodeBinary :: (Bits b, Integral b) => (b, b) -> [Bool] -> b
 #endif
@@ -170,7 +170,7 @@ splitEvery _ [] = []
 splitEvery n xs = let (nxs,rest) = splitAt n xs in nxs : splitEvery n rest
 
 #if MIN_VERSION_base(4, 7, 0)
-encodeWithCode :: (FiniteBits b, Bits b, Integral b) => ([Bool] -> [Bool]) -> (b, b) -> b -> [Bool]
+encodeWithCode :: (FiniteBits b, Integral b) => ([Bool] -> [Bool]) -> (b, b) -> b -> [Bool]
 #else
 encodeWithCode :: (Bits b, Integral b) => ([Bool] -> [Bool]) -> (b, b) -> b -> [Bool]
 #endif
@@ -181,7 +181,7 @@ encodeWithCode code (from, to) n =
     in  code . take nbits $ toList (n - from') ++ (repeat False)
 
 #if MIN_VERSION_base(4, 7, 0)
-decodeWithCode :: (FiniteBits b, Bits b, Integral b) => ([Bool] -> [Bool]) -> (b, b) -> [Bool] -> b
+decodeWithCode :: (FiniteBits b, Integral b) => ([Bool] -> [Bool]) -> (b, b) -> [Bool] -> b
 #else
 decodeWithCode :: (Bits b, Integral b) => ([Bool] -> [Bool]) -> (b, b) -> [Bool] -> b
 #endif

@@ -37,9 +37,6 @@ resolver: lts-7.8
 # will not be run. This is useful for tweaking upstream packages.
 packages:
 - '.'
-- location:
-    git: https://github.com/jwaldmann/monad-mersenne-random
-    commit: d1f949fe60dc0c0cfbd310b339fe7fd5ecf4c5f5
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)
 extra-deps:
