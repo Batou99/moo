@@ -216,7 +216,7 @@ degreeOfViolation beta eta constraints genome =
 -- Reference: Deb, K. (2000). An efficient constraint handling method
 -- for genetic algorithms. Computer methods in applied mechanics and
 -- engineering, 186(2), 311-338.
-withConstraints :: (Real b, Real c)
+withConstraints :: (Real c)
     => [Constraint a b]                      -- ^ constraints
     -> ([Constraint a b] -> Genome a -> c)   -- ^ non-negative degree of violation,
                                              -- see 'numberOfViolations' and 'degreeOfViolation'
@@ -227,7 +227,7 @@ withConstraints constraints violation ptype =
     withPopulationTransform (penalizeInfeasible constraints violation ptype)
 
 
-penalizeInfeasible :: (Real b, Real c)
+penalizeInfeasible :: (Real c)
     => [Constraint a b]
     -> ([Constraint a b] -> Genome a -> c)
     -> ProblemType

@@ -16,10 +16,8 @@ module Moo.GeneticAlgorithm.Utilities
 import Moo.GeneticAlgorithm.Types
 import Moo.GeneticAlgorithm.Random
 
-
-import Control.Monad.Mersenne.Random
 import Control.Monad (replicateM)
-
+import Control.Monad.State.Strict (MonadState(..))
 
 -- | Generate @n@ random genomes made of elements in the
 -- hyperrectangle ranges @[(from_i,to_i)]@. Return a list of genomes
@@ -44,10 +42,7 @@ getRandomGenomes :: (Random a, Ord a)
                          => Int  -- ^ @n@, how many genomes to generate
                          -> [(a, a)]  -- ^ ranges for individual genome elements
                          -> Rand ([Genome a])  -- ^ random genomes
-getRandomGenomes n ranges =
-    Rand $ \rng ->
-        let (gs, rng') = randomGenomes rng n ranges
-        in  R gs rng'
+getRandomGenomes n ranges = state $ \rng -> randomGenomes rng n ranges
 
 
 -- | Crossover all available parents. Parents are not repeated.
